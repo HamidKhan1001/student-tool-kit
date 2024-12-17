@@ -1,0 +1,74 @@
+.payment-section {
+  background-color: #f4f4f4;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-container {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  border: 5px solid #1a73e8; /* Added 15px solid border with the same blue color */
+}
+  .payment-container h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+  }
+  
+  .payment-container p {
+    color: #6c757d;
+    margin-bottom: 2rem;
+  }
+  
+  .price-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .price {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1a73e8;
+    margin-right: 0.5rem;
+  }
+  
+  .per-text {
+    color: #6c757d;
+  }
+  
+  .payment-description {
+    margin-bottom: 2rem;
+    color: #5f6368;
+  }
+  
+  .payment-button {
+    display: inline-block;
+    background-color: #1fc52d;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .payment-button:hover {
+    background-color: #379b2a;
+  }
+  
+  @media (max-width: 768px) {
+    .payment-container {
+      width: 90%;
+      padding: 1.5rem;
+    }
+  }
+  

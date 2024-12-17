@@ -1,0 +1,31 @@
+.app-container {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  padding-top: 80px; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+a.active {
+  color: #2596be;
+}
+
+.featured-universities {
+  padding: 40px 20px;
+  background-color: #f9f9f9; 
+  text-align: center;
+}
+
+.featured-universities h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.featured-universities .university-slider {
+  margin-top: 20px;
+}

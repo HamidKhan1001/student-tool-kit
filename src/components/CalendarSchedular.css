@@ -1,0 +1,193 @@
+.calendar-scheduler-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2rem;
+  }
+  
+  .calendar-scheduler-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    border: 3px solid #3498db;
+    padding: 2rem;
+  }
+  
+  .scheduler-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+  }
+  
+  .scheduler-header h1 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .scheduler-header p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+  }
+  
+  .scheduler-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+  }
+  
+  .calendar-section {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+  }
+  
+  .custom-calendar {
+    width: 100% !important;
+    border: none !important;
+    background: white !important;
+    padding: 1rem !important;
+    border-radius: 10px !important;
+  }
+  
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  .section-title svg {
+    color: #3498db;
+  }
+  
+  .time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.8rem;
+  }
+  
+  .time-slot {
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .time-slot:hover {
+    border-color: #3498db;
+    transform: translateY(-2px);
+  }
+  
+  .time-slot.selected {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+  }
+  
+  .meeting-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .schedule-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .schedule-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .schedule-button:disabled {
+    background: #e0e0e0;
+    cursor: not-allowed;
+  }
+  
+  .meetings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .meeting-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    transition: transform 0.3s ease;
+  }
+  
+  .meeting-card:hover {
+    transform: translateY(-5px);
+    border-color: #3498db;
+  }
+  
+  .meeting-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .meeting-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3498db;
+  }
+  
+  @media (max-width: 768px) {
+    .scheduler-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .calendar-scheduler-container {
+      padding: 1rem;
+    }
+  }
+  
