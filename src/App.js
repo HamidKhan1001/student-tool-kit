@@ -50,7 +50,7 @@ const App = () => {
       return <Navigate to="/auth" />;
     }
     
-    return <AuthenticatedLayout>{children}</AuthenticatedLayout>;
+    return <AuthenticatedLayout user={user} handleLogout={handleLogout}>{children}</AuthenticatedLayout>;
   };
 
   if (isLoading) {
@@ -64,7 +64,9 @@ const App = () => {
   };
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={
+  <Home isAuthenticated={!!user} user={user} handleLogout={handleLogout} />
+} />
       <Route path="/auth" element={
         user ? <Navigate to="/dashboard" /> : <SignInSignUp setUser={setUser} />
       } />

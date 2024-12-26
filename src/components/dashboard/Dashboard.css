@@ -95,7 +95,7 @@ margin-left: 200px;
 }
 .profile-summary-box {
     width: 1500px !important;
-    height: 500px; /* Increased height to accommodate more content */
+    height: 565px; /* Increased height to accommodate more content */
     border-radius: 15px;
     border: 6px solid #007bff;
     padding: 20px;
@@ -535,4 +535,82 @@ margin-left: 200px;
 .document-modal-content iframe {
     background: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+/* Modern Dashboard Styling */
+.dashboard-container {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    min-height: 100vh;
+}
+
+.main-heading, .profile-main-heading, .documents-main-heading, .checklist-main-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 42px;
+    color: #1a73e8;
+    margin: 40px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.main-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #1a73e8, #34a853);
+    border-radius: 2px;
+}
+
+.questionnaire-summary-box, .profile-summary-box, .documents-summary-box, .checklist-summary-box {
+    background: white;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin: 30px auto;
+    padding: 30px;
+}
+
+.questionnaire-summary-box:hover, .profile-summary-box:hover {
+    transform: translateY(-5px);
+}
+
+.edit-questionnaire-button, .edit-profile-button, .upload-documents-button, .recommendations-button {
+    background: linear-gradient(135deg, #1a73e8, #4285f4);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2);
+}
+
+.edit-questionnaire-button:hover, .edit-profile-button:hover {
+    background: linear-gradient(135deg, #4285f4, #1a73e8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.profile-details p {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.profile-details p:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
 }

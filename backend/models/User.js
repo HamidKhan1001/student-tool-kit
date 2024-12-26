@@ -42,6 +42,9 @@ const User = sequelize.define('User', {
     },
     location: {
         type: DataTypes.STRING,
+    },emailSent: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 });
 

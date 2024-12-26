@@ -27,6 +27,13 @@ app.use('/uploads', (req, res, next) => {
     }
     next();
 });
+// const path1 = require('path'); app.get('/uploads/documents/:filename', (req, res) => {     
+//     const filePath = path1.join(__dirname, 'uploads/documents', req.params.filename);     
+//     // Set inline to preview in the browser    
+//     res.setHeader('Content-Disposition', 'inline'); 
+//     res.setHeader('Content-Type', 'application/pdf'); // Ensure Content-Type is set
+//     res.sendFile(filePath); 
+// });
 // Serve static files from uploads directory
 app.use('/uploads', express.static('uploads'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

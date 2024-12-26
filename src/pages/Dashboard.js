@@ -26,9 +26,9 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
     const [showEditProfileForm, setShowEditProfileForm] = useState(false);
     const [numPages, setNumPages] = useState(null);
     // Add this function
-const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-};
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setNumPages(numPages);
+    };
 
     // In the useEffect where you fetch documents
     useEffect(() => {
@@ -182,14 +182,7 @@ const onDocumentLoadSuccess = ({ numPages }) => {
                                     Edit Questionnaire
                                 </button>
 
-                                {showEditQuestionnaire && (
-                                    <EditQuestionnaire
-                                        questionnaireId={selectedQuestionnaire.id}
-                                        questionnaireData={selectedQuestionnaire}
-                                        onClose={() => setShowEditQuestionnaire(false)}
-                                        onUpdate={handleQuestionnaireUpdate}
-                                    />
-                                )}
+
 
                             </div>
                         )}
@@ -249,46 +242,33 @@ const onDocumentLoadSuccess = ({ numPages }) => {
                                         <i className={`fas ${userDocuments.find(doc => doc.certificateId === cert.id) ? 'fa-check-circle' : 'fa-times-circle'} check-icon`}></i>
                                     </div>
                                 ))}
-{showDocumentModal && (
-    <div className="document-modal">
-        <div className="document-modal-content">
-            <span className="close" onClick={() => setShowDocumentModal(false)}>&times;</span>
-            {selectedDocument ? (
-                selectedDocument.imagePath.toLowerCase().endsWith('.pdf') ? (
-                    <div style={{ width: '100%', height: '600px', overflowY: 'auto' }}>
-                        <Document
-    file={`http://localhost:5000/${selectedDocument.imagePath}`}
-    onLoadSuccess={onDocumentLoadSuccess}
-    onLoadError={(error) => {
-        console.log('Error loading PDF:', error);
-        // Add user-friendly error message display
-        return <p>Unable to load PDF. Please try again later.</p>;
-    }}
-    loading={<p>Loading PDF...</p>}
->
-    {Array.from(new Array(numPages), (el, index) => (
-        <Page 
-            key={`page_${index + 1}`} 
-            pageNumber={index + 1} 
-            width={600}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-        />
-    ))}
-</Document>
-                    </div>
-                ) : (
-                    <img
-                        src={`http://localhost:5000/${selectedDocument.imagePath}`}
-                        alt="Document"
-                    />
-                )
-            ) : (
-                <p>No document uploaded yet</p>
-            )}
-        </div>
-    </div>
-)}
+                                {showDocumentModal && (
+                                    <div className="document-modal">
+                                        <div className="document-modal-content">
+                                            <span className="close" onClick={() => setShowDocumentModal(false)}>×</span>
+                                            {selectedDocument ? (
+                                                selectedDocument.imagePath.toLowerCase().endsWith('.pdf') ? (
+                                                    <div style={{ width: '100%', height: '750px', overflowY: 'auto' }}>
+                                                        <iframe
+                                                            src={`http://localhost:5000/${selectedDocument.imagePath}`}
+                                                            width="100%"
+                                                            height="750px"
+                                                            title="PDF Document"
+                                                            style={{ border: 'none' }}
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <img
+                                                        src={`http://localhost:5000/${selectedDocument.imagePath}`}
+                                                        alt="Document"
+                                                    />
+                                                )
+                                            ) : (
+                                                <p>No document uploaded yet</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
 
                             </div>
                         </div>
@@ -307,6 +287,14 @@ const onDocumentLoadSuccess = ({ numPages }) => {
                                 localStorage.setItem('user', JSON.stringify({ ...user, ...updatedProfile }));
                                 setShowEditProfileForm(false);
                             }}
+                        />
+                    )}
+                    {showEditQuestionnaire && (
+                        <EditQuestionnaire
+                            questionnaireId={selectedQuestionnaire.id}
+                            questionnaireData={selectedQuestionnaire}
+                            onClose={() => setShowEditQuestionnaire(false)}
+                            onUpdate={handleQuestionnaireUpdate}
                         />
                     )}
                     {showQuestionnaire && (

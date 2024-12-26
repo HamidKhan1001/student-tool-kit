@@ -4,15 +4,16 @@ import CalendarScheduler from '../components/CalendarSchedular';
 import GoogleCalendar from '../components/GoogleCalendar';
 import PaymentSection from '../components/PaymentSection';
 import './Recommendations.css';
-const RecommendationsPage = ({ user, setUser,handleLogout }) => {
+const RecommendationsPage = ({ user, setUser, handleLogout }) => {
     const [recommendations, setRecommendations] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [hasPayment, setHasPayment] = useState(false);
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/questionnaires/recommendations/${user.id}`);
                 setRecommendations(response.data.recommendations);
+                setHasPayment(response.data.hasPayment);
             } catch (error) {
                 console.error('Error fetching recommendations:', error);
             } finally {
@@ -49,7 +50,7 @@ const RecommendationsPage = ({ user, setUser,handleLogout }) => {
             gap: '2.5rem',
             padding: '1rem',
             perspective: '1000px',
-            
+
         },
         universityCard: {
             background: 'white',
@@ -102,34 +103,53 @@ const RecommendationsPage = ({ user, setUser,handleLogout }) => {
             }
         }
     };
-    
-    
+
+
     return (
         <>
-        <div style={styles.recommendationsContainer}className="recommendations-container">
-            <h2 >Your University Recommendations</h2>
-            {loading ? (
-                <div>Loading recommendations...</div>
-            ) : (
-                <div className="universities-grid">
-                    {recommendations.map((university) => (
-                        <div key={university.id} className="university-card">
-                            <h3>{university.name}</h3>
-                            <p>Country: {university.Country.name}</p>
-                            <p>Field: {university.FieldOfStudy.name}</p>
-                            <p>Annual Fee: {university.Fee.amount} {university.Fee.currency}</p>
-                            <p>{university.details}</p>
-                            <button className="apply-button">Apply Now</button>
-                        </div>
-                    ))}
+            <div style={styles.recommendationsContainer} className="recommendations-container">
+                <h2 >Your University Recommendations</h2>
+                {loading ? (
+                    <div>Loading recommendations...</div>
+                ) : (
+                    <div className="universities-grid">
+                        {recommendations.map((university) => (
+                            <div key={university.id} className="university-card">
+                                <h3>{university.name}</h3>
+                                <div className={`university-details ${hasPayment !== true ? 'blur-content' : ''}`}>
+                                    <p>Country: {university.Country.name}</p>
+                                    <p>Field: {university.FieldOfStudy.name}</p>
+                                    <p>Annual Fee: {university.Fee.amount} {university.Fee.currency}</p>
+                                    <p>{university.details}</p>
+                                    <button
+                                        className="apply-button"
+                                        onClick={() => {
+                                            if (!hasPayment) {
+                                                // Redirect to payment section or show payment modal
+                                                alert("Please complete payment to apply");
+                                                return;
+                                            }
+                                            // Handle actual application process
+                                        }}
+                                    >
+                                        {hasPayment ? 'Apply Now' : 'Unlock Application'}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <div className="payment-notice">
+                    <h3>Complete payment to apply for Universities and other features</h3>
                 </div>
-            )}
-            <PaymentSection />
-            <GoogleCalendar />
-        </div>
+                <PaymentSection />
+                <div className={!hasPayment ? 'blur-content' : ''}>
+                    <GoogleCalendar />
+                </div>
+            </div>
 
         </>
-        
+
     );
 };
 export default RecommendationsPage;

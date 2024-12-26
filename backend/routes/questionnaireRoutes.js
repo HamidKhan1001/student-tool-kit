@@ -1,4 +1,5 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 const EducationLevel= require('../models/EducationLevel');
 const FieldOfStudy= require('../models/FieldOfStudy');
 const Country= require('../models/Country');
@@ -9,7 +10,33 @@ const Certification = require('../models/Certification');
 const University = require('../models/University');
 
 const router = express.Router();
-
+const maskData = (university) => {
+    return {
+        ...university,
+        Country: { 
+            ...university.Country,
+            name: '*** Hidden ***'
+        },
+        FieldOfStudy: {
+            ...university.FieldOfStudy,
+            name: '*** Hidden ***'
+        },
+        Fee: {
+            ...university.Fee,
+            amount: '*****',
+            currency: '***'
+        },
+        details: 'Complete payment to unlock full university details'
+    };
+};
+// Configure email transporter
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'your-email@gmail.com',
+        pass: 'your-app-password'
+    }
+});
 router.post('/submit', async (req, res) => {
     // console.log('Full session object:', req.session);
     // console.log('User ID from Questionnaire:', req.body.userId);
@@ -43,6 +70,8 @@ router.get('/recommendations/:userId', async (req, res) => {
     const { userId } = req.params;
     let recommendations = [];
     try {
+        const hasPayment = false; // Replace with actual payment verification
+
         const questionnaire = await Questionnaire.findOne({ 
             where: { userId: userId },
             order: [['createdAt', 'DESC']]
@@ -61,10 +90,17 @@ router.get('/recommendations/:userId', async (req, res) => {
             ]
         });
         console.log('Matching Universities:',matchingUniversities);
+ // Check payment status - you'll need to implement your payment check here
+ 
+ const processedUniversities = matchingUniversities.map(university => {
+     const plainUni = university.get({ plain: true });
+     return hasPayment ? plainUni : maskData(plainUni);
+ });
 
         res.status(200).json({ 
-            recommendations: matchingUniversities,
-            questionnaire: questionnaire 
+            recommendations: processedUniversities,
+            questionnaire: questionnaire ,
+            hasPayment: hasPayment // Send payment status to frontend
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -85,7 +121,22 @@ router.get('/profile-status/:userId', async (req, res) => {
             user.province && 
             user.gender
         );
+        if (!hasCompletedProfile && !user.emailSent) {
+            const mailOptions = {
+                from: 'your-email@gmail.com',
+                to: user.email,
+                subject: 'Complete Your Profile',
+                html: `
+                    <h1>Hello ${user.name},</h1>
+                    <p>Please complete your profile to get personalized university recommendations.</p>
+                    <a href="http://admissionsexpress.com/dashboard">Complete Profile</a>
+                `
+            };
 
+            await transporter.sendMail(mailOptions);
+            await user.update({ emailSent: true });
+
+        }
         res.json({
             hasCompletedProfile
         });
@@ -187,6 +238,7 @@ router.get('/certifications', async (req, res) => {
 router.get('/status/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
+        const user = await User.findByPk(userId);
         const questionnaire = await Questionnaire.findOne({
             where: { userId: userId },
             include: [{
@@ -212,7 +264,21 @@ router.get('/status/:userId', async (req, res) => {
 
         });
         // console.log(questionnaire);
-        
+        if (!questionnaire) {
+            const mailOptions = {
+                from: 'your-email@gmail.com',
+                to: user.email,
+                subject: 'Complete Your Academic Questionnaire',
+                html: `
+                    <h1>Hello ${user.name},</h1>
+                    <p>Complete your academic questionnaire to receive tailored university recommendations.</p>
+                    <a href="http://yourwebsite.com/dashboard">Fill Questionnaire</a>
+                `
+            };
+
+            await transporter.sendMail(mailOptions);
+            await user.update({ emailSent: true });
+        }
         res.json({
             hasAnswered: !!questionnaire,
             questionnaire: questionnaire
@@ -222,6 +288,7 @@ router.get('/status/:userId', async (req, res) => {
     }
 });
 // Add this route with your existing routes
+
 router.put('/update/:id', async (req, res) => {
     console.log('Update request received:', req.body);
     console.log('Questionnaire ID:', req.params.id);

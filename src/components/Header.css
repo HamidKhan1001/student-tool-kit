@@ -1,58 +1,177 @@
-.header-area {
-  background-color: rgba(0, 0, 0, 0.9);
+.header {
+  background: #111827;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  height: 70px;
   position: fixed;
-  top: 0;
   width: 100%;
+  top: 0;
   z-index: 1000;
-  padding: 20px 30px;
+}
+
+.navbar {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
+  padding: 0 24px;
 }
 
-.logo-container {
+.logo-section .brand {
   display: flex;
   align-items: center;
-}
-
-.logo-container a {
-  display: flex;
-  align-items: center;
+  gap: 12px;
   text-decoration: none;
 }
 
-.logo-image {
-  height: 50px;
-  margin-right: 10px;
+.logo-img {
+  height: 32px;
 }
 
 .logo-text {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
   color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.nav {
+.nav-sections {
   display: flex;
   align-items: center;
-  gap: 25px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  gap: 32px;
 }
 
-.nav li a {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e5e7eb;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-.nav li a:hover,
-.nav li a.active {
-  color: #2596be;
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.notification-center {
+  position: relative;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.notification-center i {
+  color: #e5e7eb;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.notification-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.user-profile:hover .user-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.auth-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.auth-btn {
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.auth-btn.login {
+  color: #e5e7eb;
+}
+
+.auth-btn.register {
+  background: #3b82f6;
+  color: white;
+}
+
+.auth-btn.register:hover {
+  background: #2563eb;
 }

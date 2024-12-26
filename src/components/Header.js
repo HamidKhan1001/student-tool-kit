@@ -1,60 +1,101 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import Logo from '../assets/images/aelogo.png';
-
-const Header = () => (
-  // <header className="header-area">
-  //   <div className="logo-container">
-  //     <Link to="/">
-  //       <img src={Logo} alt="AdmissionsExpress Logo" className="logo-image" />
-  //       <span className="logo-text">AdmissionsExpress</span>
-  //     </Link>
-  //   </div>
-  //   <ul className="nav">
-  //     <li><a href="#about">About Us</a></li>
-  //     <li><a href="#services">Services</a></li>
-  //     <li><a href="#how-it-works">How It Works</a></li>
-  //     <li><a href="#testimonials">Testimonials</a></li>
-  //     <li><a href="#contact">Contact Us</a></li>
-  //     <li><Link to="/auth">Sign In/Sign Up</Link></li>
-  //   </ul>
-  // </header>
-        <header class="header-area header-sticky">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <nav class="main-nav">
-                {/* <!-- ***** Logo Start ***** --> */}
-                <Link to="/"className="logo">
-                  <img src="/aelogo.png" alt="Logo" style={{ height: '50px', width: 'auto' }} />
-                  Admissions Express
-                </Link>
-                {/* <!-- ***** Logo End ***** --> */}
-                {/* <!-- ***** Menu Start ***** --> */}
-                <ul class="nav">
-                  <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                  <li><a href="meetings.html">Meetings</a></li>
-                  <li class="scroll-to-section"><a href="#apply">Apply Now</a></li>
-                  <li class="has-sub">
-                    <a href="javascript:void(0)">Pages</a>
-                    <ul class="sub-menu">
-                      <li><a href="meetings.html">Upcoming Meetings</a></li>
-                      <li><a href="meeting-details.html">Meeting Details</a></li>
-                    </ul>
-                  </li>
-                  <li class="scroll-to-section"><a href="#courses">Courses</a></li>
-                  <li class="scroll-to-section"><Link to="/auth">Sign In/Sign Up</Link></li>
-                </ul>
-                <a class='menu-trigger'>
-                  <span>Menu</span>
-                </a>
-                {/* <!-- ***** Menu End ***** --> */}
-              </nav>
-            </div>
-          </div>
+import '../assets/images/aelogo.png';
+const Header = ({ isAuthenticated, user, handleLogout }) => {
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  
+  return (
+    <header className="header fixed-top">
+      <nav className="navbar">
+        <div className="logo-section">
+          <Link to="/" className="brand">
+            <img src="/aelogo.png" alt="AE" className="logo-img" />
+            <span className="logo-text">AdmissionsExpress</span>
+          </Link>
         </div>
-      </header>
-);
+
+        <div className="nav-sections">
+          {isAuthenticated && user ? (
+            <>
+              <div className="nav-links">
+                <Link to="/dashboard" className="nav-item">
+                  <i className="fas fa-home"></i>
+                  <span>Dashboard</span>
+                </Link>
+                <Link to="/recommendations" className="nav-item">
+                  <i className="fas fa-graduation-cap"></i>
+                  <span>Universities</span>
+                </Link>
+                <Link to="/applications" className="nav-item">
+                  <i className="fas fa-file-alt"></i>
+                  <span>Applications</span>
+                </Link>
+              </div>
+
+              <div className="user-controls">
+                <div className="notification-center" onClick={() => setIsNotificationOpen(!isNotificationOpen)}>
+                  <i className="fas fa-bell"></i>
+                  <span className="notification-badge">2</span>
+                  <div className={`notification-dropdown ${isNotificationOpen ? 'show' : ''}`}>
+                    <div className="notification-header">
+                      <h3>Notifications</h3>
+                      <span>Mark all as read</span>
+                    </div>
+                    <div className="notification-list">
+                      <div className="notification-item unread">
+                        <i className="fas fa-circle"></i>
+                        <span>Your application was reviewed</span>
+                      </div>
+                      <div className="notification-item">
+                        <span>Document upload successful</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="user-profile">
+                  <div className="user-avatar">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="user-dropdown">
+                    <div className="user-header">
+                      <span className="user-name">{user.name}</span>
+                      <span className="user-email">{user.email}</span>
+                    </div>
+                    <div className="dropdown-content">
+                      <Link to="/profile" className="dropdown-item">
+                        <i className="fas fa-user"></i>
+                        <span>My Profile</span>
+                      </Link>
+                      <Link to="/settings" className="dropdown-item">
+                        <i className="fas fa-cog"></i>
+                        <span>Settings</span>
+                      </Link>
+                      <Link to="/help" className="dropdown-item">
+                        <i className="fas fa-question-circle"></i>
+                        <span>Help Center</span>
+                      </Link>
+                      <div className="dropdown-divider"></div>
+                      <button onClick={handleLogout} className="dropdown-item logout">
+                        <i className="fas fa-sign-out-alt"></i>
+                        <span>Sign Out</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="auth-controls">
+              <Link to="/auth" className="auth-btn login">Sign In</Link>
+              <Link to="/auth" className="auth-btn register">Get Started</Link>
+            </div>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
+};
 
 export default Header;
