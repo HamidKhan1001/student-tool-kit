@@ -13,7 +13,7 @@ const EditProfileForm = ({ user, onClose, onUpdate }) => {
         gender: user.gender || '',
         birthdate: user.birthdate ? new Date(user.birthdate).toISOString().split('T')[0] : '',
     });
-
+    const apiUrlRootPath = process.env.REACT_APP_API_URL;
     const [options, setOptions] = useState({
         locations: [],
         provinces: [],
@@ -24,8 +24,8 @@ const EditProfileForm = ({ user, onClose, onUpdate }) => {
         const fetchOptions = async () => {
             try {
                 const [locationsResponse, provincesResponse] = await Promise.all([
-                    axios.get('http://localhost:5000/api/profile/locations'),
-                    axios.get('http://localhost:5000/api/profile/provinces')
+                    axios.get(`${apiUrlRootPath}/profile/locations`),
+                    axios.get(`${apiUrlRootPath}/profile/provinces`)
                 ]);
 
                 setOptions(prevOptions => ({
@@ -44,7 +44,7 @@ const EditProfileForm = ({ user, onClose, onUpdate }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:5000/api/questionnaires/profile/update/${user.id}`, formData, {
+            const response = await axios.put(`${apiUrlRootPath}/questionnaires/profile/update/${user.id}`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'

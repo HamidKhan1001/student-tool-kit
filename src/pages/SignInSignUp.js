@@ -8,6 +8,7 @@ const SignInSignUp = ({ setUser }) => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const apiUrlRootPath = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const toggleMode = () => {
@@ -27,7 +28,7 @@ const SignInSignUp = ({ setUser }) => {
       }
 
       try {
-        const response = await axios.post('http://localhost:5000/api/users/signup', {
+        const response = await axios.post(`${apiUrlRootPath}/users/signup`, {
           name: formData.name,
           email: formData.email,
           password: formData.password,
@@ -44,7 +45,7 @@ const SignInSignUp = ({ setUser }) => {
 
     } else {
       try {
-        const response = await axios.post('http://localhost:5000/api/users/signin', {
+        const response = await axios.post(`${apiUrlRootPath}/users/signin`, {
           email: formData.email,
           password: formData.password,
         }, {

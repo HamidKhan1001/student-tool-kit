@@ -8,10 +8,11 @@ const RecommendationsPage = ({ user, setUser, handleLogout }) => {
     const [recommendations, setRecommendations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [hasPayment, setHasPayment] = useState(false);
+     const apiUrlRootPath = process.env.REACT_APP_API_URL;
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/questionnaires/recommendations/${user.id}`);
+                const response = await axios.get(`${apiUrlRootPath}/questionnaires/recommendations/${user.id}`);
                 setRecommendations(response.data.recommendations);
                 setHasPayment(response.data.hasPayment);
             } catch (error) {

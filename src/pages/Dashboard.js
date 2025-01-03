@@ -25,6 +25,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
     const [hasCompletedProfile, setHasCompletedProfile] = useState(false);
     const [showEditProfileForm, setShowEditProfileForm] = useState(false);
     const [numPages, setNumPages] = useState(null);
+    const apiUrlRootPath = process.env.REACT_APP_API_URL;
     // Add this function
     const onDocumentLoadSuccess = ({ numPages }) => {
         setNumPages(numPages);
@@ -34,7 +35,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
     useEffect(() => {
         const fetchUserDocuments = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/uploads/user-documents/${user.id}`);
+                const response = await axios.get(`${apiUrlRootPath}/uploads/user-documents/${user.id}`);
                 // Ensure response data is an array
                 setUserDocuments(Array.isArray(response.data) ? response.data : []);
             } catch (error) {
@@ -51,7 +52,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
     const handleDocumentUploadSuccess = async (certificateId) => {
         try {
             // Fetch the most recently uploaded document for this certificateId
-            const response = await axios.get(`http://localhost:5000/api/uploads/user-documents/${user.id}`);
+            const response = await axios.get(`${apiUrlRootPath}/uploads/user-documents/${user.id}`);
 
             // Find the document that matches the certificateId
             const newDocument = response.data.find(doc => doc.certificateId === certificateId);
@@ -106,11 +107,11 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:5000/api/questionnaires/status/${storedUser.id}`);
+            const response = await axios.get(`${apiUrlRootPath}/questionnaires/status/${storedUser.id}`);
             setSelectedQuestionnaire(response.data.questionnaire);
             setHasAnsweredQuestionnaire(response.data.hasAnswered);
             // Check if profile is complete
-            const profileResponse = await axios.get(`http://localhost:5000/api/questionnaires/profile-status/${storedUser.id}`);
+            const profileResponse = await axios.get(`${apiUrlRootPath}/questionnaires/profile-status/${storedUser.id}`);
             setHasCompletedProfile(profileResponse.data.hasCompletedProfile);
         } catch (error) {
             console.log('Error checking questionnaire status:', error);

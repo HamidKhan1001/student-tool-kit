@@ -18,6 +18,7 @@ const Questionnaire = ({ user,onSubmit,onClose,onUpdate }) => {
     const [fieldsOfStudy, setFieldsOfStudy] = useState([]);
     const [countries, setCountries] = useState([]);
     const [fees, setFees] = useState([]);
+    const apiUrlRootPath = process.env.REACT_APP_API_URL;
 
     const user_id = user.id;
     console.log(user_id);
@@ -25,7 +26,7 @@ const Questionnaire = ({ user,onSubmit,onClose,onUpdate }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/questionnaires/submit', {
+            const response = await axios.post(`${apiUrlRootPath}/questionnaires/submit`, {
                 user_id, fieldOfStudy,
                 languageTest,
                 country,
@@ -55,10 +56,10 @@ const Questionnaire = ({ user,onSubmit,onClose,onUpdate }) => {
                     countriesResponse,
                     feesResponse
                 ] = await Promise.all([
-                    axios.get('http://localhost:5000/api/questionnaires/education-levels'),
-                    axios.get('http://localhost:5000/api/questionnaires/fields-of-study'),
-                    axios.get('http://localhost:5000/api/questionnaires/countries'),
-                    axios.get('http://localhost:5000/api/questionnaires/fees')
+                    axios.get(`${apiUrlRootPath}/questionnaires/education-levels`),
+                    axios.get(`${apiUrlRootPath}/questionnaires/fields-of-study`),
+                    axios.get(`${apiUrlRootPath}/questionnaires/countries`),
+                    axios.get(`${apiUrlRootPath}/questionnaires/fees`)
                 ]);
                 // console.log('Responses received:', {
                 //     education: educationResponse.data,

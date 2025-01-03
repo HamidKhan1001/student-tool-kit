@@ -7,9 +7,10 @@ const DocumentUploadModal = ({ isOpen, onClose,userId,onUploadSuccess  }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const apiUrlRootPath = process.env.REACT_APP_API_URL;
     useEffect(() => {
         // Fetch certifications from the backend
-        fetch('http://localhost:5000/api/questionnaires/certifications')
+        fetch(`${apiUrlRootPath}/questionnaires/certifications`)
             .then(response => response.json())
             .then(data => setCertifications(data))
             .catch(error => console.error('Error fetching certifications:', error));
@@ -31,7 +32,7 @@ const DocumentUploadModal = ({ isOpen, onClose,userId,onUploadSuccess  }) => {
         formData.append('file', selectedFile);
         formData.append('userId', userId);
         try {
-            const response = await fetch('http://localhost:5000/api/uploads/upload-document', {
+            const response = await fetch(`${apiUrlRootPath}/uploads/upload-document`, {
                 method: 'POST',
                 body: formData
             });

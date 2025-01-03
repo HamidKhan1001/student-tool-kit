@@ -10,7 +10,7 @@ const EditQuestionnaire = ({ questionnaireId, questionnaireData, onClose, onUpda
         languageTest: questionnaireData.languageTest,
         feeId: questionnaireData.feeId,
     });
-
+    const apiUrlRootPath = process.env.REACT_APP_API_URL;
     const [options, setOptions] = useState({
         educationLevels: [],
         fieldsOfStudy: [],
@@ -21,10 +21,10 @@ const EditQuestionnaire = ({ questionnaireId, questionnaireData, onClose, onUpda
     useEffect(() => {
         const fetchOptions = async () => {
             const [educationLevels, fields, countries, fees] = await Promise.all([
-                axios.get('http://localhost:5000/api/questionnaires/education-levels'),
-                axios.get('http://localhost:5000/api/questionnaires/fields-of-study'),
-                axios.get('http://localhost:5000/api/questionnaires/countries'),
-                axios.get('http://localhost:5000/api/questionnaires/fees')
+                axios.get(`${apiUrlRootPath}/questionnaires/education-levels`),
+                axios.get(`${apiUrlRootPath}/questionnaires/fields-of-study`),
+                axios.get(`${apiUrlRootPath}/questionnaires/countries`),
+                axios.get(`${apiUrlRootPath}/questionnaires/fees`)
             ]);
 
             setOptions({
@@ -42,7 +42,7 @@ const EditQuestionnaire = ({ questionnaireId, questionnaireData, onClose, onUpda
         e.preventDefault();
         try {
             const response = await axios.put(
-                `http://localhost:5000/api/questionnaires/update/${questionnaireId}`, 
+                `${apiUrlRootPath}/questionnaires/update/${questionnaireId}`, 
                 formData
             );
             onUpdate(response.data);
