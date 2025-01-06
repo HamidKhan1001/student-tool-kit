@@ -26,6 +26,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
     const [showEditProfileForm, setShowEditProfileForm] = useState(false);
     const [numPages, setNumPages] = useState(null);
     const apiUrlRootPath = process.env.REACT_APP_API_URL;
+    const apiUploadRootPath = process.env.REACT_APP_FOR_UPLOADS_URL;
     // Add this function
     const onDocumentLoadSuccess = ({ numPages }) => {
         setNumPages(numPages);
@@ -251,7 +252,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
                                                 selectedDocument.imagePath.toLowerCase().endsWith('.pdf') ? (
                                                     <div style={{ width: '100%', height: '750px', overflowY: 'auto' }}>
                                                         <iframe
-                                                            src={`${apiUrlRootPath}/${selectedDocument.imagePath}`}
+                                                            src={`${apiUploadRootPath}/${selectedDocument.imagePath}`}
                                                             width="100%"
                                                             height="750px"
                                                             title="PDF Document"
@@ -260,7 +261,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
                                                     </div>
                                                 ) : (
                                                     <img
-                                                        src={`${apiUrlRootPath}/${selectedDocument.imagePath}`}
+                                                        src={`${apiUploadRootPath}/${selectedDocument.imagePath}`}
                                                         alt="Document"
                                                     />
                                                 )
