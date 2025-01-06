@@ -169,9 +169,11 @@ const Questionnaire = ({ user,onSubmit,onClose,onUpdate }) => {
                                 ))}
                             </select>
                         </div>
-
-                        <button type="submit" className="submit-btn">Submit</button>
-                    </form>
+                        <div className="button-group">
+                            <button type="button" className="cancel-btn" onClick={onClose}>Cancel</button>
+                            <button type="submit" className="submit-btn">Submit</button>
+                        </div>
+ </form>
                 {/* </div> */}
             </div>
         </div>

@@ -173,3 +173,52 @@
 .form-group select:invalid {
     border-color: #dc3545;
 }
+.profile-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8c8d8f #f0f0f0;
+}
+
+.profile-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.profile-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.profile-content::-webkit-scrollbar-thumb {
+    background: #989899;
+    border-radius: 4px;
+}
+
+.profile-content::-webkit-scrollbar-thumb:hover {
+    background: #909192;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.cancel-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: linear-gradient(135deg, #c82333, #bd2130);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
