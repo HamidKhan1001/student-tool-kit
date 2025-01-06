@@ -2,8 +2,8 @@ const mysql = require('mysql');
 
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',  // Change this if you are using a different user
-  password: '',  // Enter your password if necessary
+  user: 'ae',  // Change this if you are using a different user
+  password: 'password',  // Enter your password if necessary
   database: 'admissions_express',  // Name of your database
 });
 
