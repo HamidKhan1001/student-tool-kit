@@ -21,7 +21,7 @@ const ProfileForm = ({ user, onSubmit, onClose, onUpdate }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:5000/api/questionnaires/profile/${user_id}`, {
+            const response = await axios.put(`${apiUrlRootPath}/questionnaires/profile/${user_id}`, {
                 user_id,
                 firstName,
                 lastName,
