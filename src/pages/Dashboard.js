@@ -75,7 +75,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
     console.log(userDocuments);
     useEffect(() => {
         // Fetch certifications from the backend
-        fetch('http://localhost:5000/api/questionnaires/certifications')
+        fetch(`${apiUrlRootPath}/questionnaires/certifications`)
             .then(response => response.json())
             .then(data => setCertificateTypes(data))
             .catch(error => console.error('Error fetching certifications:', error));
@@ -251,7 +251,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
                                                 selectedDocument.imagePath.toLowerCase().endsWith('.pdf') ? (
                                                     <div style={{ width: '100%', height: '750px', overflowY: 'auto' }}>
                                                         <iframe
-                                                            src={`http://localhost:5000/${selectedDocument.imagePath}`}
+                                                            src={`${apiUrlRootPath}/${selectedDocument.imagePath}`}
                                                             width="100%"
                                                             height="750px"
                                                             title="PDF Document"
@@ -260,7 +260,7 @@ const Dashboard = ({ user, setUser, handleLogout }) => {
                                                     </div>
                                                 ) : (
                                                     <img
-                                                        src={`http://localhost:5000/${selectedDocument.imagePath}`}
+                                                        src={`${apiUrlRootPath}/${selectedDocument.imagePath}`}
                                                         alt="Document"
                                                     />
                                                 )
