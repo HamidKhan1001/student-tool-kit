@@ -39,7 +39,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(cors({
-    origin: 'https://app.admissionsexpress.com',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST','PUT','DELETE'],
     credentials: true
 }));
