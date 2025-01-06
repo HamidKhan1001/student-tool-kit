@@ -15,7 +15,7 @@ const ProfileForm = ({ user, onSubmit, onClose, onUpdate }) => {
     // State for dropdown options if needed
     const [provinces, setProvinces] = useState([]);
     const [cities, setCities] = useState([]);
-
+    const apiUrlRootPath = process.env.REACT_APP_API_URL;
     const user_id = user.id;
     
     const handleSubmit = async (e) => {
