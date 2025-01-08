@@ -4,7 +4,8 @@ import './Header.css';
 import '../assets/images/aelogo.png';
 const Header = ({ isAuthenticated, user, handleLogout }) => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  
+  const apiUrlRootPath = process.env.REACT_APP_API_URL;
+  const apiUploadRootPath = process.env.REACT_APP_FOR_UPLOADS_URL;
   return (
     <header className="header fixed-top">
       <nav className="navbar">
@@ -23,22 +24,20 @@ const Header = ({ isAuthenticated, user, handleLogout }) => {
                   <i className="fas fa-home"></i>
                   <span>Dashboard</span>
                 </Link>
-                <Link to="/recommendations" className="nav-item">
-                  <i className="fas fa-graduation-cap"></i>
-                  <span>Universities</span>
+                {user?.role === 'admin' && (
+                <Link to={`${apiUploadRootPath}/admin`}  className="nav-item" target="_blank" rel="noopener noreferrer">
+                  <i className="fas fa-shield-alt"></i>
+                  <span>Admin Panel</span>
                 </Link>
-                <Link to="/applications" className="nav-item">
-                  <i className="fas fa-file-alt"></i>
-                  <span>Applications</span>
-                </Link>
+              )}
               </div>
 
               <div className="user-controls">
                 <div className="notification-center" onClick={() => setIsNotificationOpen(!isNotificationOpen)}>
                   <i className="fas fa-bell"></i>
-                  <span className="notification-badge">2</span>
+                  {/* <span className="notification-badge">2</span> */}
                   <div className={`notification-dropdown ${isNotificationOpen ? 'show' : ''}`}>
-                    <div className="notification-header">
+                    {/* <div className="notification-header">
                       <h3>Notifications</h3>
                       <span>Mark all as read</span>
                     </div>
@@ -50,7 +49,7 @@ const Header = ({ isAuthenticated, user, handleLogout }) => {
                       <div className="notification-item">
                         <span>Document upload successful</span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -63,7 +62,7 @@ const Header = ({ isAuthenticated, user, handleLogout }) => {
                       <span className="user-name">{user.name}</span>
                       <span className="user-email">{user.email}</span>
                     </div>
-                    <div className="dropdown-content">
+                    {/* <div className="dropdown-content">
                       <Link to="/profile" className="dropdown-item">
                         <i className="fas fa-user"></i>
                         <span>My Profile</span>
@@ -81,7 +80,7 @@ const Header = ({ isAuthenticated, user, handleLogout }) => {
                         <i className="fas fa-sign-out-alt"></i>
                         <span>Sign Out</span>
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

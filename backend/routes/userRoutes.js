@@ -58,6 +58,7 @@ router.post('/signin', async (req, res) => {
         req.session.userId = user.id;
         req.session.userName = user.name;
         req.session.userEmail = user.email;
+        req.session.userRole = user.role;
         req.session.firstName = user.firstName;
         req.session.lastName = user.lastName;
         req.session.contact = user.contact;
@@ -81,6 +82,7 @@ router.post('/signin', async (req, res) => {
                     id: user.id,
                     name: user.name,
                     email: user.email,
+                    role: user.role,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     contact: user.contact,
