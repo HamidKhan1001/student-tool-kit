@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Student Toolkit Upload</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Upload Your Notes/Slides</h1>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg" required>
+      <button type="submit">Process</button>
+    </form>
+    {% with msgs = get_flashed_messages() %}
+      {% if msgs %}
+        <ul class="flashes">
+          {% for m in msgs %}
+            <li>{{ m }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Preview Processed PDF</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Your Processed PDF</h1>
+    <iframe
+      class="pdf-view"
+      src="{{ url_for('exported_file', filename=filename) }}">
+    </iframe>
+    <p>
+      <a class="btn" href="{{ url_for('download_file', filename=filename) }}">
+        ⬇️ Download PDF
+      </a>
+    </p>
+  </div>
+</body>
+</html>
