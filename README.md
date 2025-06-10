@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# 🎓 Student Tool Kit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A smart academic assistant that transforms lecture PDFs into concise summaries, visual diagrams, quizzes, and flashcards — all compiled into a single exportable PDF.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📌 Features
 
-### `npm start`
+- 📄 **PDF to Text Conversion** via OCR
+- 🧠 **Text Summarization** using BART (HuggingFace Transformers)
+- 📊 **Diagram Generation** via Graphviz
+- ❓ **Auto-Generated Quizzes & Flashcards**
+- 📦 **Export to PDF** with summaries, visuals, and questions
+- 🔧 Docker-ready and configurable for local environments
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 How It Works
 
-### `npm test`
+1. **Upload** a PDF (lecture notes, academic articles, etc.)
+2. **OCR** extracts raw text from the document
+3. **Summarization** splits and compresses text using a transformer model
+4. **Diagram Generator** visualizes key summary concepts
+5. **Quiz and Flashcard Generator** builds Q&A from the text
+6. **PDF Export** compiles everything into a clean, printable document
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠 Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Python 3.10+**
+- `pytesseract`, `pdf2image`, `Pillow` – for OCR
+- `transformers` – for NLP summarization
+- `graphviz` – for generating diagrams
+- `reportlab` – for PDF creation
+- **Poppler** – for PDF rendering
+- **Tesseract OCR** – for text extraction from images
+- **Docker** – optional containerized deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📷 Sample Output
 
-### `npm run eject`
+![WhatsApp Image 2025-06-10 at 12 33 25_8757e10e](https://github.com/user-attachments/assets/273b9b11-9575-405c-aaad-7abd61980988)
+![WhatsApp Image 2025-06-10 at 12 33 31_449dbe42](https://github.com/user-attachments/assets/53a49d94-249c-4398-901b-7308758d7267)
+![WhatsApp Image 2025-06-10 at 12 33 38_f056cb2e](https://github.com/user-attachments/assets/d6069345-09eb-4ab2-ad04-cfb07fc2535e)
+![WhatsApp Image 2025-06-10 at 12 33 47_8861b6db](https://github.com/user-attachments/assets/e7da016d-9b21-4ae7-846b-391b2f38791e)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🧪 Setup Instructions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🔧 Local Setup
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/HamidKhan1001/student-tool-kit.git
+   cd student-tool-kit
